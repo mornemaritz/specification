@@ -1,6 +1,6 @@
 ﻿namespace Msq.Specification
 {
-    public static class SpecificationFactory
+    public static class Specification
     {
         public static AllSpecification<T> MatchAll<T>() where T: class
         {

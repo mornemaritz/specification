@@ -16,7 +16,7 @@ namespace Msq.Specification
         {
             var otherExpression = other.ToExpression();
 
-            var notExpression = Expression.Not(otherExpression);
+            var notExpression = Expression.Not(otherExpression.Body);
 
             notExpression = (UnaryExpression)CopyParameters(notExpression);
             var finalExpression = Expression.Lambda<Func<TCandidate, bool>>(notExpression, ParameterExpression);
