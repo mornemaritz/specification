@@ -40,5 +40,15 @@ namespace Msq.Specification.UnitTests
             // Act & Assert
             Assert.IsTrue(specificationUnderTest.IsSatisfiedBy(targetCandidate));
         }
+
+        [Test]
+        public void SpecificationFactory_MatchAll_ReturnsAllSpecification()
+        {
+            // Act
+            var actualSpecification = Specification.MatchAll<TestCandidate>();
+
+            // Assert
+            Assert.IsInstanceOf<AllSpecification<TestCandidate>>(actualSpecification);
+        }
     }
 }

@@ -40,5 +40,15 @@ namespace Msq.Specification.UnitTests
             // Act & Assert
             Assert.IsFalse(specificationUnderTest.IsSatisfiedBy(targetCandidate));
         }
+
+        [Test]
+        public void SpecificationFactory_MatchNone_ReturnsNoneSpecification()
+        {
+            // Act
+            var actualSpecification = Specification.MatchNone<TestCandidate>();
+
+            // Assert
+            Assert.IsInstanceOf<NoneSpecification<TestCandidate>>(actualSpecification);
+        }
     }
 }

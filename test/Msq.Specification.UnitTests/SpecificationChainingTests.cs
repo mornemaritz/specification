@@ -6,7 +6,7 @@ using System.Linq;
 namespace Msq.Specification.UnitTests
 {
     [TestFixture]
-    public class SpecificationTests
+    public class SpecificationChainingTests
     {
         private PositiveIntegerAttributeSpecification positiveIntegerAttribute;
         private NonEmptyStringAttributeSpecification nonEmptyStringAttribute;
