@@ -5,17 +5,31 @@
 
 trigger:
 - master
+- feature/*
 
 pool:
   vmImage: 'windows-latest'
 
+variables:
+  GitVersion.SemVer: ''
+
 steps:
+- task: UseGitVersion@5
+  displayName: Version
+  inputs:
+    versionSpec: '5.x'
+    # Not entirely sure about this one. dotnet core apps do not have an assemblyinfo.cs
+    # Yup, it failed. Will it work if I just set it to false?
+    updateAssemblyInfo: false
+
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
     command: build
     projects: 'src/Msq.Specification/Msq.Specification.csproj'
-    arguments: '--configuration Release'
+    arguments: '--configuration Release /p:Version=$(GitVersion.SemVer)'
+    versioningScheme: byEnvVar
+    versionEnvVar: 'GitVersion.SemVer'
 
 - task: DotNetCoreCLI@2
   displayName: Test
