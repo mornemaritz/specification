@@ -10,17 +10,17 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
     command: build
-    projects: '**/*.csproj'
+    projects: 'src/Msq.Specification/Msq.Specification.csproj'
     arguments: '--configuration Release'
+
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: test
+    projects: 'test/Msq.Specification.UnitTests/Msq.Specification.UnitTests.csproj'
+    arguments: '--configuration Release --collect "Code Coverage"'
+
