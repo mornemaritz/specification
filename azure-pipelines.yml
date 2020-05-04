@@ -19,9 +19,6 @@ steps:
   displayName: Version
   inputs:
     versionSpec: '5.x'
-    # Not entirely sure about this one. dotnet core apps do not have an assemblyinfo.cs
-    # Yup, it failed. Will it work if I just set it to false?
-    updateAssemblyInfo: false
 
 - task: DotNetCoreCLI@2
   displayName: Build
@@ -38,4 +35,16 @@ steps:
     command: test
     projects: 'test/Msq.Specification.UnitTests/Msq.Specification.UnitTests.csproj'
     arguments: '--configuration Release --collect "Code Coverage"'
+
+- task: NuGetAuthenticate@0
+  inputs:
+    nuGetServiceConnections: 'nuget.org'
+
+- task: NuGetCommand@2
+  displayName: Publish
+  inputs:
+    command: push
+    nuGetFeedType: external
+    versioningScheme: byEnvVar
+    versionEnvVar: GitVersion.NuGetVersion    
 
