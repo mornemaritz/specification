@@ -1,0 +1,14 @@
+assembly-versioning-scheme: MajorMinorPatch
+major-version-bump-message: '\*(break|breaking)\*'
+minor-version-bump-message: '\*(feature)\*'
+patch-version-bump-message: '\*(fix|patch)\*'
+no-bump-message: '\*none\*'
+mode: Mainline
+next-version: 1.0.0
+branches:
+  feature:
+    tag: alpha
+  master:
+    tag: ''
+ignore:
+  sha: []
