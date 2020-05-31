@@ -37,8 +37,10 @@ steps:
     arguments: '--configuration Release --collect "Code Coverage"'
 
 - task: DotNetCoreCLI@2
+  displayName: Pack
   inputs:
     command: 'pack'
+    arguments: --configuration Release
     nobuild: true
   
 - task: DotNetCoreCLI@2
