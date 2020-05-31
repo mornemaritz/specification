@@ -42,11 +42,15 @@ steps:
     command: 'pack'
     arguments: --configuration Release
     nobuild: true
+    versioningScheme: byEnvVar
+    versionEnvVar: 'GitVersion.SemVer'    
   
 - task: DotNetCoreCLI@2
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+    versioningScheme: byEnvVar
+    versionEnvVar: 'GitVersion.SemVer'    
     nuGetFeedType: 'external'
     publishFeedCredentials: 'nuget.org'
 
