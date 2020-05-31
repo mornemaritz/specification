@@ -36,15 +36,11 @@ steps:
     projects: 'test/Msq.Specification.UnitTests/Msq.Specification.UnitTests.csproj'
     arguments: '--configuration Release --collect "Code Coverage"'
 
-- task: NuGetAuthenticate@0
+- task: DotNetCoreCLI@2
   inputs:
-    nuGetServiceConnections: 'nuget.org'
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'nuget.org'
 
-- task: NuGetCommand@2
-  displayName: Publish
-  inputs:
-    command: push
-    nuGetFeedType: external
-    versioningScheme: byEnvVar
-    versionEnvVar: GitVersion.NuGetVersion    
 
