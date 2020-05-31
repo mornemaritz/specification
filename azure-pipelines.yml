@@ -40,12 +40,12 @@ steps:
   displayName: Pack
   inputs:
     command: 'pack'
-    arguments: --configuration Release
-    nobuild: true
+    #nobuild: true
     versioningScheme: byEnvVar
     versionEnvVar: 'GitVersion.SemVer'    
   
 - task: DotNetCoreCLI@2
+  displayName: Push
   inputs:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
